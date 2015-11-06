@@ -6,6 +6,7 @@
  */
 
 require '/var/www/html/email_client.php';
+
 $threshold=$argv[1];
 $receiver=$argv[2];
 
@@ -18,17 +19,14 @@ curl_setopt($handle,  CURLOPT_RETURNTRANSFER, TRUE);
 
 $json = json_decode(curl_exec($handle), true);
 
- print_r(curl_exec($handle));
-
 if($json['success'] && $json['quotes']['USDINR']>=$threshold){
    $message= "Exchange rates above ".$json['quotes']['USDINR']." INR. Consider transferring money now.";
-   $subject= "Favourable Exchange Rates !!";
-   
+   $subject= "Favourable Exchange Rates !!";   
 }elseif(!$json['success'] ){
    $message= "There is some issue with the Exchangor API. Please look into it";
    $subject= "Issue with the Exchangor API";
 }else{
-    return 0;
+   return 0;
 }
 email_client::email_send($receiver,$message,$subject);
 ?>
