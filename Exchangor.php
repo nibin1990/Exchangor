@@ -1,7 +1,7 @@
 <?php
 
 /* 
- * Utility to notify you when you have favourable exchange rates
+ * Utility to notify you wen you have favourable exchange rates
  * @Author Nibin
  */
 
